@@ -34,7 +34,10 @@ public class KeyGenerator
 	 	}
  	}
 
- 	public static void main(String args[]){
- 		generateKey("BestKey");
+ 	public static void main(String args[])
+	{
+		//generateKey("server");
+		generateKey("bryan");
+		generateKey("pedro");
  	}
 }
