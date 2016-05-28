@@ -205,7 +205,7 @@ class ChatServerThread extends Thread
         while (true)
         {  
             try
-            {  
+            {
                 server.handle(ID, streamIn.readUTF());
             }
          
