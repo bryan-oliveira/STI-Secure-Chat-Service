@@ -1,5 +1,8 @@
 import java.net.*;
 import java.io.*;
+import java.security.*;
+import javax.crypto.KeyAgreement;
+import javax.crypto.spec.DHParameterSpec;
 
 
 public class ChatServer implements Runnable
@@ -226,6 +229,26 @@ class ChatServerThread extends Thread
                         BufferedInputStream(socket.getInputStream()));
         streamOut = new DataOutputStream(new
                         BufferedOutputStream(socket.getOutputStream()));
+    }
+
+    public void secureConnection(){
+
+    	KeyPairGenerator keyGenerator = KeyPairGenerator.getInstance("DH");
+    	SecureRandom random = new SecureRandom();
+    	byte bytes[] = new byte[20];
+    	random.nextBytes(bytes);
+    	keyGenerator.initialize(2048,random);
+
+    	KeyAgreement serverAgreeKey = KeyAgreement.getInstance("DH");
+    	KeyPair serverPair = keyGenerator.generateKeyPair();
+
+    	serverAgreeKey.init(serverPair.getPrivate());
+    	
+
+
+
+
+
     }
     
     // Closes thread
