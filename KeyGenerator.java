@@ -3,32 +3,33 @@ import java.security.*;
 
 public class KeyGenerator
 {
- 	public static void generateKey(String keyname){
+ 	public static void generateKey(String username){
  		
  		try{
-	 		// Generates secret keys for DH algorithm 
-	 		KeyPairGenerator generateKey = KeyPairGenerator.getInstance("DH");
-	 		// Random number generator 
-	 		SecureRandom random = new SecureRandom();
-	 		byte bytes[] = new byte[20];
-	 		random.nextBytes(bytes);
+			/* Random number generator - Seed */
+			SecureRandom random = SecureRandom.getInstanceStrong();
+
+			/* Generates secret keys for RSA algorithm */
+	 		KeyPairGenerator generateKey = KeyPairGenerator.getInstance("RSA");
 	 		generateKey.initialize(1024,random);
 
+			/* Use KeyPairGenerator to generate keypair */
 	 		KeyPair pair = generateKey.generateKeyPair();
 	 		PrivateKey priv = pair.getPrivate();
 	 		PublicKey pub = pair.getPublic();
 
-	 		// Writing private key to a file
+	 		/* Writing private key to a file */
 	 		byte[] keyPriv = priv.getEncoded();
-	 		FileOutputStream privKeyWriting = new FileOutputStream("keys/" + keyname + ".public");
+	 		FileOutputStream privKeyWriting = new FileOutputStream("keys/" + username + ".private");
 	 		privKeyWriting.write(keyPriv);
 	 		privKeyWriting.close();
 
-	 		// Writing public key to a file
+	 		/* Writing public key to a file */
 	 		byte[] keyPub = pub.getEncoded();
-	 		FileOutputStream pubKeyWriting = new FileOutputStream("keys/" + keyname + ".private");
+	 		FileOutputStream pubKeyWriting = new FileOutputStream("keys/" + username + ".public");
 	 		pubKeyWriting.write(keyPub);
 	 		pubKeyWriting.close();
+
 	 	}catch(Exception e){
 	 		e.printStackTrace();
 	 	}
@@ -36,7 +37,7 @@ public class KeyGenerator
 
  	public static void main(String args[])
 	{
-		//generateKey("server");
+		generateKey("server");
 		generateKey("bryan");
 		generateKey("pedro");
  	}
