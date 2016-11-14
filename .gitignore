@@ -1,3 +1,9 @@
+
+*.iml
+
+# Ignore eclipse /out directory
+/out
+
 ### Linux ###
 *~
 

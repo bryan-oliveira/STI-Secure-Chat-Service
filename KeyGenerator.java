@@ -1,6 +1,10 @@
 import java.io.FileOutputStream;
 import java.security.*;
 
+/**
+ * This class generates unique keys for users based on the RSA algorithm with 1024 bits encryption.
+ */
+
 public class KeyGenerator
 {
  	public static void generateKey(String username){

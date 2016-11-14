@@ -21,8 +21,8 @@ public class ChatClient implements Runnable
     private PublicKey   serverPublicKey     = null;
     private SecretKey   serverSymKey        = null;
     private String      nickname            = null;
-    private boolean     renewKeyLease;
-    private boolean     secureConnEstablished;
+    private boolean     renewKeyLease       = false;
+    private boolean     secureConnEstablished = false;
 
     public ChatClient(String serverName, int serverPort, String nickname)
     {
@@ -43,7 +43,8 @@ public class ChatClient implements Runnable
     }
 
     public static void main(String args[])
-    {
+    {Decrypted msg with client private key
+Signed message
         ChatClient client = null;
         if (args.length != 3)
             System.out.println("Usage: java ChatClient <host> <port> <nickname>");
@@ -112,7 +113,8 @@ public class ChatClient implements Runnable
         byte[] hashDecrypted = security.decryptMessageSym(serverSymKey, hash);
 
         boolean verifySignature = security.verifyMessageSignature(serverPublicKey, hashDecrypted, msgDecrypted);
-        System.out.println("Msg: " + new String(msgDecrypted));
+        System.out.println("Msg: " + new StringDecrypted msg with client private key
+        Signed message(msgDecrypted));
         System.out.println("Msg is verified:" + verifySignature + "Source: server (public key)");
 
         // Receives message from server
@@ -160,7 +162,8 @@ public class ChatClient implements Runnable
             System.out.println("Sent client public key");
 
             // Get server public key
-            byte[] serverPublicKeyBytes = readBytes();
+            byte[] serverPublicKeyBytes = readBDecrypted msg with client private key
+Signed messageytes();
             serverPublicKey = security.getPublicKeyFromBytes(serverPublicKeyBytes);
             System.out.println("Got server public key");
 
@@ -226,7 +229,7 @@ public class ChatClient implements Runnable
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+SECURE AUTHORIZATIO
         return null;
     }
 
@@ -307,7 +310,7 @@ class ChatClientThread extends Thread
     public void open()
     {
         try { streamIn  = new DataInputStream(socket.getInputStream()); }
-
+SECURE AUTHORIZATIO
         catch(IOException ioe)
         {
             System.out.println("Error getting input stream: " + ioe);

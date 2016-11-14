@@ -9,7 +9,7 @@ import java.security.spec.X509EncodedKeySpec;
 
 /**
  * Created by boliveira on 5/28/16.
- * Defines Security functionality pertaining to public/private key administration.
+ * Security functionality pertaining to public/private key administration.
  */
 
 public class Security

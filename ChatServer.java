@@ -170,15 +170,15 @@ class ChatServerThread extends Thread
     private DataInputStream  streamIn  =  null;
     private DataOutputStream streamOut = null;
 
-    private Security    security    = null;
-    private PublicKey   clientPublicKey = null;
-    private PublicKey   serverPublicKey   = null;
-    private PrivateKey  serverPrivateKey  = null;
-    private SecretKey   serverSymKey      = null;
-    private String      nickname    = null;
+    private Security    security            = null;
+    private PublicKey   clientPublicKey     = null;
+    private PublicKey   serverPublicKey     = null;
+    private PrivateKey  serverPrivateKey    = null;
+    private SecretKey   serverSymKey        = null;
+    private String      nickname            = null;
 
     private boolean     secureConnectionEstablished = false;
-    private long startTime;
+    private long startTime                          = 0;
 
 
     public ChatServerThread(ChatServer _server, Socket _socket)
@@ -274,6 +274,7 @@ class ChatServerThread extends Thread
             System.out.println("Msg: " + new String(msgDecrypted));
             System.out.println("Msg is verified:" + verifySignature);
             System.out.println("Sending message to peers");
+
             if (verifySignature)
                 server.handle(this, msgDecrypted);
             else {
@@ -284,6 +285,7 @@ class ChatServerThread extends Thread
             // Force key exchange every 10 seconds
             long totalTime = (System.currentTimeMillis() / 1000) - startTime;
             System.out.println("Time:" + totalTime);
+
             if( totalTime > 30)
             {
                 System.out.println("Renew lease");
